@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link as _Link } from 'react-router-dom';
 
 const Container = styled.form`
   display: flex;
@@ -19,6 +20,7 @@ const Credentials = styled.div`
 
 const Field = styled.div`
   font-size: 1.5em;
+  font-weight: bold;
 `
 
 const Label = styled.p`
@@ -33,7 +35,7 @@ const Input = styled.input`
   font-size: inherit;
 `
 
-const Button = styled.button`
+const Link = styled(_Link)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,6 +45,7 @@ const Button = styled.button`
   font-weight: bold;
   background: ${props => props.theme.green};
   color: inherit;
+  text-decoration: none;
 `
 
 const LoginBox = (props) => (
@@ -57,7 +60,7 @@ const LoginBox = (props) => (
         <Input type="password" name="pwd"/>
       </Field>
     </Credentials>
-    <Button type="button">Login</Button>
+    <Link to="/dashboard">Login</Link>
   </Container>
 );
 

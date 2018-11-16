@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import './index.css';
-import Login from './components/Login';
+import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 
 const theme = {
@@ -14,7 +15,9 @@ const theme = {
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    <Login/>
+    <BrowserRouter>
+      <App/>
+    </BrowserRouter>
   </ThemeProvider>,
 document.getElementById('root'));
 
