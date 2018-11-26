@@ -90,7 +90,7 @@ const Button = styled.button`
 `
 
 const SurveyModal = ({ isOpen, closeModal }) => (
-  <Modal isOpen={isOpen} fullscreen>
+  <Modal isOpen={isOpen} closeModal={closeModal} fullscreen>
     <Container>
       <Header>Encuesta de satisfacción</Header>
       <Form>

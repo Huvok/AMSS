@@ -86,7 +86,7 @@ const ModalButton = styled.button`
   padding: 0.5em 1.5em;
   border: 0;
   margin: 0.5em;
-  background: ${props => props.red ? '#ce1246' : props.theme.green};
+  background: ${props => props.red ? props.theme.red : props.theme.green};
   font-size: inherit;
   font-weight: bold;
   cursor: pointer;
@@ -97,7 +97,7 @@ const Link = styled(_Link)`
 `
 
 const TripConfirmationModal = ({ isOpen, closeModal }) => (
-  <Modal fullscreen isOpen={isOpen}>
+  <Modal fullscreen isOpen={isOpen} closeModal={closeModal}>
     <ModalContainer>
       <Locations>
         <LocationText><strong>Origen</strong>: Monterrey</LocationText>

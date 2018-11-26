@@ -2,11 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import ReactModal from 'react-modal';
 
-function ReactModalAdapter({ className, modalClassName, ...props }) {
+function ReactModalAdapter({ className, modalClassName, closeModal, ...props }) {
   return (
     <ReactModal
       className={modalClassName}
       portalClassName={className}
+      shouldCloseOnOverlayClick={true}
+      onRequestClose={closeModal}
       {...props}
     />
   );
@@ -57,8 +59,8 @@ const Container = styled.div`
   }
 `
 
-const Modal = ({ fullscreen, isOpen, children }) => (
-  <StyledModal className={fullscreen ? 'fullscreen' : ''} isOpen={isOpen}>
+const Modal = ({ fullscreen, isOpen, closeModal, children }) => (
+  <StyledModal className={fullscreen ? 'fullscreen' : ''} isOpen={isOpen} closeModal={closeModal}>
     <Container>
       {children}
     </Container>

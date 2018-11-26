@@ -34,7 +34,7 @@ const ReturnButton = styled.button`
 `
 
 const TripInfoModal = ({ isOpen, closeModal }) => (
-  <Modal isOpen={isOpen}>
+  <Modal isOpen={isOpen} closeModal={closeModal}>
     <Container>
       <Header>Información del viaje</Header>
       <Text>
