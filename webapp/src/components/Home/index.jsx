@@ -9,6 +9,7 @@ const Container = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
 `
 
 const MapWrapper = styled.div`
@@ -32,7 +33,7 @@ const Home = () => (
     </MapWrapper>
     <LowerBox>
       <Switch>
-        <Route path="/home" render={() => (
+        <Route render={() => (
           <InputTrip />
         )}/>
       </Switch>
