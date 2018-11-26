@@ -23,7 +23,7 @@ const App = () => (
       <Route exact path="/" render={() => (
         <Start />
       )}/>
-      <Route path="/clientLogin" render={() => (
+      <Route path="/(clientLogin|taxiLogin)" render={() => (
         <Login />
       )}/>
       <Route render={() => (
