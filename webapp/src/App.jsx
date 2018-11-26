@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import Start from './components/Start';
 import Login from './components/Login';
+import Register from './components/Register';
 import FourOFour from './components/404';
 
 const Container = styled.div`
@@ -25,6 +26,9 @@ const App = () => (
       )}/>
       <Route path="/(clientLogin|taxiLogin)" render={() => (
         <Login />
+      )}/>
+      <Route path="/register" render={() => (
+        <Register />
       )}/>
       <Route render={() => (
         <FourOFour />
