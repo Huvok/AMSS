@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 
 import Start from './components/Start';
+import Login from './components/Login';
 
 const Container = styled.div`
   display: flex;
@@ -20,6 +21,9 @@ const App = () => (
     <Switch>
       <Route exact path="/" render={() => (
         <Start />
+      )}/>
+      <Route path="/clientLogin" render={() => (
+        <Login />
       )}/>
     </Switch>
   </Container>

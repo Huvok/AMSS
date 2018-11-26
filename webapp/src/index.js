@@ -8,6 +8,7 @@ import * as serviceWorker from './serviceWorker';
 
 const theme = {
   black: '#23303f',
+  lightgray: '#828ca4',
   lightgreen: '#aaf3cb',
   green: '#14ce66',
   darkgreen: '#158938',
