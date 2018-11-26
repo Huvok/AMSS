@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import Start from './components/Start';
 import Login from './components/Login';
 import Register from './components/Register';
+import Forgot from './components/Forgot';
 import FourOFour from './components/404';
 
 const Container = styled.div`
@@ -29,6 +30,9 @@ const App = () => (
       )}/>
       <Route path="/register" render={() => (
         <Register />
+      )}/>
+      <Route path="/forgot" render={() => (
+        <Forgot />
       )}/>
       <Route render={() => (
         <FourOFour />
