@@ -144,7 +144,7 @@ const BMButton = styled.button`
 
 class CurrentlyInTrip extends Component {
   state = {
-    modal: 2
+    modal: 0
   }
 
   openModal = (number) => {
