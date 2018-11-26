@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 
-import Map from './Map';
+// import Map from './Map';
 import InputTrip from './InputTrip';
 
 const Container = styled.div`
