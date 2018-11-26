@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 
 // import Map from './Map';
+import CurrentlyInTrip from './CurrentlyInTrip';
 import InputTrip from './InputTrip';
 
 const Container = styled.div`
@@ -33,6 +34,9 @@ const Home = () => (
     </MapWrapper>
     <LowerBox>
       <Switch>
+        <Route path="/home/trip" render={() => (
+          <CurrentlyInTrip />
+        )}/>
         <Route render={() => (
           <InputTrip />
         )}/>

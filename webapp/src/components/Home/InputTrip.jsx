@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Link as _Link } from 'react-router-dom';
 
-import FullScreenModal from './FullScreenModal';
+import Modal from './Modal';
 
 const Container = styled.div`
   height: 100%;
@@ -110,6 +111,10 @@ const ModalButton = styled(Button)`
   background: ${props => props.red ? '#ce1246' : props.theme.green};
 `
 
+const Link = styled(_Link)`
+  align-self: center;
+`
+
 class InputTrip extends Component {
   state = {
     modalOpen: false
@@ -130,9 +135,7 @@ class InputTrip extends Component {
         <Input type="text" name="destination" placeholder="Destino"/>
         <Button type="button" onClick={this.openModal}>Continuar</Button>
       </Form>
-      <FullScreenModal
-        isOpen={this.state.modalOpen}
-      >
+      <Modal fullscreen isOpen={this.state.modalOpen}>
         <ModalContainer>
           <Locations>
             <LocationText><strong>Origen</strong>: Monterrey</LocationText>
@@ -161,12 +164,14 @@ class InputTrip extends Component {
               <MetricsText>Costo: $your soul</MetricsText>
             </Metrics>
             <Buttons>
-              <ModalButton onClick={this.closeModal}>Aceptar</ModalButton>
+              <Link onClick={this.closeModal} to="/home/trip">
+                <ModalButton>Aceptar</ModalButton>
+              </Link>
               <ModalButton onClick={this.closeModal} red>Rechazar</ModalButton>
             </Buttons>
           </TripDetails>
         </ModalContainer>
-      </FullScreenModal>
+      </Modal>
     </Container>
   );
 }
