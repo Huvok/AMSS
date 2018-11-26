@@ -6,6 +6,7 @@ import Start from './components/Start';
 import Login from './components/Login';
 import Register from './components/Register';
 import Forgot from './components/Forgot';
+import Home from './components/Home';
 import FourOFour from './components/404';
 
 const Container = styled.div`
@@ -33,6 +34,9 @@ const App = () => (
       )}/>
       <Route path="/forgot" render={() => (
         <Forgot />
+      )}/>
+      <Route path="/home" render={() => (
+        <Home />
       )}/>
       <Route render={() => (
         <FourOFour />
