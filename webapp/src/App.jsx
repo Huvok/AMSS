@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import Start from './components/Start';
 import Login from './components/Login';
+import FourOFour from './components/404';
 
 const Container = styled.div`
   display: flex;
@@ -24,6 +25,9 @@ const App = () => (
       )}/>
       <Route path="/clientLogin" render={() => (
         <Login />
+      )}/>
+      <Route render={() => (
+        <FourOFour />
       )}/>
     </Switch>
   </Container>
