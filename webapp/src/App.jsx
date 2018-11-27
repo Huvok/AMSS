@@ -6,9 +6,9 @@ import Start from './components/Start';
 import Login from './components/Login';
 import Register from './components/Register';
 import Forgot from './components/Forgot';
-import Home from './components/Home';
-import Menu from './components/Menu';
-import History from './components/History';
+import ClientHome from './components/ClientHome';
+import ClientMenu from './components/ClientMenu';
+import ClientHistory from './components/ClientHistory';
 import FourOFour from './components/404';
 
 const Container = styled.div`
@@ -29,8 +29,11 @@ const App = () => (
       <Route exact path="/" render={() => (
         <Start />
       )}/>
-      <Route path="/(clientLogin|taxiLogin)" render={() => (
-        <Login />
+      <Route path="/clientLogin" render={() => (
+        <Login homePath="/client/home"/>
+      )}/>
+      <Route path="/taxiLogin" render={() => (
+        <Login homePath="/taxi/home"/>
       )}/>
       <Route path="/register" render={() => (
         <Register />
@@ -38,14 +41,14 @@ const App = () => (
       <Route path="/forgot" render={() => (
         <Forgot />
       )}/>
-      <Route path="/home" render={() => (
-        <Home />
+      <Route path="/client/home" render={() => (
+        <ClientHome />
       )}/>
-      <Route path="/menu" render={() => (
-        <Menu />
+      <Route path="/client/menu" render={() => (
+        <ClientMenu />
       )}/>
-      <Route path="/history" render={() => (
-        <History />
+      <Route path="/client/history" render={() => (
+        <ClientHistory />
       )}/>
       <Route render={() => (
         <FourOFour />

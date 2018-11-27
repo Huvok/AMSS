@@ -81,7 +81,7 @@ const History = () => (
         <HistoryItem {...item}/>
       ))}
     </HistoryList>
-    <Button to="/menu">Regresar</Button>
+    <Button to="/client/menu">Regresar</Button>
   </Container>
 )
 

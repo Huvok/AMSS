@@ -61,7 +61,7 @@ const Forgot = styled(_Link)`
   text-decoration: none;
 `
 
-const Login = () => (
+const Login = ({ homePath }) => (
   <Container>
     <Header>Login</Header>
     <LoginBox>
@@ -69,7 +69,7 @@ const Login = () => (
       <Input type='text' name='email'/>
       <Label for='password'>Password</Label>
       <Input type='password' name='password'/>
-      <LoginButton to="/home">Login</LoginButton>
+      <LoginButton to={homePath}>Login</LoginButton>
     </LoginBox>
     <Forgot to="/forgot">Recuperar contraseña</Forgot>
   </Container>

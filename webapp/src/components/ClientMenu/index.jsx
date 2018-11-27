@@ -86,8 +86,8 @@ const Menu = () => (
       <HangingIcon className="fas fa-plus-circle fa-lg"/>
     </Info>
     <Options>
-      <Button to="/history">Ir a historial</Button>
-      <Button to="/home">Guardar y salir</Button>
+      <Button to="/client/history">Ir a historial</Button>
+      <Button to="/client/home">Guardar y salir</Button>
     </Options>
   </Container>
 )

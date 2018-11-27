@@ -126,7 +126,7 @@ const TripConfirmationModal = ({ isOpen, closeModal }) => (
           <MetricsText>Costo: $your soul</MetricsText>
         </Metrics>
         <Buttons>
-          <Link onClick={closeModal} to="/home/trip">
+          <Link onClick={closeModal} to="/client/home/trip">
             <ModalButton>Aceptar</ModalButton>
           </Link>
           <ModalButton onClick={closeModal} red>Rechazar</ModalButton>
