@@ -42,12 +42,23 @@ const LoginButton = styled(_Link)`
   text-decoration: none;
 `
 
+const Link = styled(_Link)`
+  align-self: center;
+  margin-top: 1rem;
+  color: inherit;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: bold;
+  text-decoration: none;
+`
+
 const Forgot = () => (
   <Container>
     <Header>Enviar contraseña por correo</Header>
     <Form>
       <Input type="text" name="email" placeholder="Correo electrónico" />
       <LoginButton to="/">Aceptar</LoginButton>
+      <Link to="/">Regresar</Link>
     </Form>
   </Container>
 );
