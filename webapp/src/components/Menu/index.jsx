@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   flex: 1;
@@ -10,6 +11,8 @@ const Container = styled.div`
 
 const Info = styled.div`
   flex: 1;
+  display: flex;
+  flex-direction: column;
 `
 
 const HorizontalField = styled.div`
@@ -38,15 +41,18 @@ const Options = styled.div`
   justify-content: space-around;
 `
 
-const Button = styled.button`
+const Button = styled(Link)`
   align-self: center;
   width: 85%;
   padding: 0.5em 1em;
   border: 0;
   margin: 0.5em 0.5em 2em;
   background: ${props => props.theme.green};
+  color: inherit;
   font-size: 1.3em;
   font-weight: bold;
+  text-align: center;
+  text-decoration: none;
   cursor: pointer;
 `
 
@@ -80,8 +86,8 @@ const Menu = () => (
       <HangingIcon className="fas fa-plus-circle fa-lg"/>
     </Info>
     <Options>
-      <Button>Ir a historial</Button>
-      <Button>Guardar y salir</Button>
+      <Button to="/history">Ir a historial</Button>
+      <Button to="/home">Guardar y salir</Button>
     </Options>
   </Container>
 )

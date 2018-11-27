@@ -8,6 +8,7 @@ import Register from './components/Register';
 import Forgot from './components/Forgot';
 import Home from './components/Home';
 import Menu from './components/Menu';
+import History from './components/History';
 import FourOFour from './components/404';
 
 const Container = styled.div`
@@ -42,6 +43,9 @@ const App = () => (
       )}/>
       <Route path="/menu" render={() => (
         <Menu />
+      )}/>
+      <Route path="/history" render={() => (
+        <History />
       )}/>
       <Route render={() => (
         <FourOFour />
