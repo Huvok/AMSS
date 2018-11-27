@@ -37,6 +37,7 @@ const StyledModal = styled(ReactModalAdapter).attrs({
     width: 75%;
     background: ${props => props.theme.white};
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 20;
   }
 
   &.fullscreen .Modal {

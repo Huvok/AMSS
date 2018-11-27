@@ -29,11 +29,13 @@ const MenuButton = styled(Link)`
   color: inherit;
   text-decoration: none;
   cursor: pointer;
+  z-index: 10;
 `
 
 const SignOutButton = styled(MenuButton)`
   left: auto;
   right: 1em;
+  z-index: 10;
 `
 
 const MapWrapper = styled.div`

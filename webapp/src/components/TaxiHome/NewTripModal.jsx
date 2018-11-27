@@ -25,8 +25,12 @@ const Paragraph = styled.p`
   margin: 0.25em 0;
 `
 
-const ReturnButton = styled(Link)`
-  align-self: end;
+const TwoButtons = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+const Button = styled(Link)`
   padding: 0.5em;
   border: 0;
   background: transparent;
@@ -47,7 +51,10 @@ const NewTripModal = ({ isOpen, closeModal }) => (
         <Paragraph>Destino: Guadalajara</Paragraph>
         <Paragraph>Km: 140</Paragraph>
       </Text>
-      <ReturnButton onClick={closeModal} to="/taxi/home/trip">Aceptar</ReturnButton>
+      <TwoButtons>
+        <Button onClick={closeModal} to="/taxi/home">Rechazar</Button>
+        <Button onClick={closeModal} to="/taxi/home/trip">Aceptar</Button>
+      </TwoButtons>
     </Container>
   </Modal>
 )

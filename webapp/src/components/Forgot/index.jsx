@@ -42,13 +42,11 @@ const LoginButton = styled(_Link)`
   text-decoration: none;
 `
 
-const Link = styled(_Link)`
-  align-self: center;
-  margin-top: 1rem;
+const CancelButton = styled(_Link)`
+  position: absolute;
+  bottom: 1.5em;
+  right: 2em;
   color: inherit;
-  font-size: 1em;
-  font-style: italic;
-  font-weight: bold;
   text-decoration: none;
 `
 
@@ -58,8 +56,8 @@ const Forgot = () => (
     <Form>
       <Input type="text" name="email" placeholder="Correo electrónico" />
       <LoginButton to="/">Aceptar</LoginButton>
-      <Link to="/">Regresar</Link>
     </Form>
+    <CancelButton to="/"><i className="fas fa-times fa-2x"/></CancelButton>
   </Container>
 );
 

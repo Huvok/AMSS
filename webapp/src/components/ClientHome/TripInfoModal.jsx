@@ -33,13 +33,13 @@ const ReturnButton = styled.button`
   cursor: pointer;
 `
 
-const TripInfoModal = ({ isOpen, closeModal }) => (
+const TripInfoModal = ({ isOpen, closeModal, start, destination }) => (
   <Modal isOpen={isOpen} closeModal={closeModal}>
     <Container>
       <Header>Información del viaje</Header>
       <Text>
-        <Paragraph>Origen: Monterrey</Paragraph>
-        <Paragraph>Destino: Guadalajara</Paragraph>
+        <Paragraph>Origen: {start}</Paragraph>
+        <Paragraph>Destino: {destination}</Paragraph>
         <Paragraph>Chofer: Juan Ruíz</Paragraph>
         <Paragraph>ID Chofer: 1024</Paragraph>
         <Paragraph>Km: 140</Paragraph>

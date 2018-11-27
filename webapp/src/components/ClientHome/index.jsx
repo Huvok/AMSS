@@ -29,11 +29,13 @@ const MenuButton = styled(Link)`
   color: inherit;
   text-decoration: none;
   cursor: pointer;
+  z-index: 10;
 `
 
 const SignOutButton = styled(MenuButton)`
   left: auto;
   right: 1em;
+  z-index: 10;
 `
 
 const MapWrapper = styled.div`
@@ -48,7 +50,9 @@ const LowerBox = styled.div`
 
 class Home extends Component {
   state = {
-    modal: false
+    modal: false,
+    start: '',
+    destination: ''
   }
 
   openModal = () => {
@@ -57,6 +61,14 @@ class Home extends Component {
 
   closeModal = () => {
     this.setState({ modal: false });
+  }
+
+  locationHandler = (start, event) => {
+    if (start) {
+      this.setState({ start: event.target.value });
+    } else {
+      this.setState({ destination: event.target.value });
+    }
   }
 
   render = () => (
@@ -75,10 +87,10 @@ class Home extends Component {
       <LowerBox>
         <Switch>
           <Route path="/client/home/trip" render={() => (
-            <CurrentlyInTrip />
+            <CurrentlyInTrip start={this.state.start} destination={this.state.destination}/>
           )}/>
           <Route render={() => (
-            <InputTrip />
+            <InputTrip start={this.state.start} destination={this.state.destination} changeLocation={this.locationHandler}/>
           )}/>
         </Switch>
       </LowerBox>

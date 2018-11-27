@@ -61,6 +61,14 @@ const Forgot = styled(_Link)`
   text-decoration: none;
 `
 
+const CancelButton = styled(_Link)`
+  position: absolute;
+  bottom: 1.5em;
+  right: 2em;
+  color: inherit;
+  text-decoration: none;
+`
+
 const Login = ({ homePath }) => (
   <Container>
     <Header>Login</Header>
@@ -72,6 +80,7 @@ const Login = ({ homePath }) => (
       <LoginButton to={homePath}>Login</LoginButton>
     </LoginBox>
     <Forgot to="/forgot">Recuperar contraseña</Forgot>
+    <CancelButton to="/"><i className="fas fa-times fa-2x"/></CancelButton>
   </Container>
 );
 

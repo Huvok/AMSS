@@ -35,7 +35,7 @@ const Button = styled.button`
 
 class InputTrip extends Component {
   state = {
-    modalOpen: false
+    modalOpen: false,
   }
 
   openModal = () => {
@@ -49,11 +49,11 @@ class InputTrip extends Component {
   render = () => (
     <Container>
       <Form>
-        <Input type="text" name="pickup" placeholder="Origen"/>
-        <Input type="text" name="destination" placeholder="Destino"/>
+        <Input type="text" name="pickup" value={this.props.start} placeholder="Origen" onChange={(e) => this.props.changeLocation(true, e)}/>
+        <Input type="text" name="destination" value={this.props.destination} placeholder="Destino" onChange={(e) => this.props.changeLocation(false, e)}/>
         <Button type="button" onClick={this.openModal}>Continuar</Button>
       </Form>
-      <TripConfirmationModal isOpen={this.state.modalOpen} closeModal={this.closeModal}/>
+      <TripConfirmationModal isOpen={this.state.modalOpen} closeModal={this.closeModal} start={this.props.start} destination={this.props.destination}/>
     </Container>
   );
 }

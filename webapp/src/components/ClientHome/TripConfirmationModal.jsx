@@ -96,12 +96,12 @@ const Link = styled(_Link)`
   align-self: center;
 `
 
-const TripConfirmationModal = ({ isOpen, closeModal }) => (
+const TripConfirmationModal = ({ isOpen, closeModal, start, destination }) => (
   <Modal fullscreen isOpen={isOpen} closeModal={closeModal}>
     <ModalContainer>
       <Locations>
-        <LocationText><strong>Origen</strong>: Monterrey</LocationText>
-        <LocationText><strong>Destino</strong>: San Nicolás</LocationText>
+        <LocationText><strong>Origen</strong>: {start}</LocationText>
+        <LocationText><strong>Destino</strong>: {destination}</LocationText>
       </Locations>
       <RideDetails>
         <Field>
@@ -122,14 +122,14 @@ const TripConfirmationModal = ({ isOpen, closeModal }) => (
       </RideDetails>
       <TripDetails>
         <Metrics>
-          <MetricsText>Distancia: 10.5km</MetricsText>
-          <MetricsText>Costo: $your soul</MetricsText>
+          <MetricsText>Distancia: 5.9km</MetricsText>
+          <MetricsText>Costo: $46.70</MetricsText>
         </Metrics>
         <Buttons>
           <Link onClick={closeModal} to="/client/home/trip">
             <ModalButton>Aceptar</ModalButton>
           </Link>
-          <ModalButton onClick={closeModal} red>Rechazar</ModalButton>
+          <ModalButton onClick={closeModal} red>Cancelar</ModalButton>
         </Buttons>
       </TripDetails>
     </ModalContainer>

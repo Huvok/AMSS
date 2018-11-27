@@ -42,7 +42,7 @@ class CurrentlyInTrip extends Component {
 
   render = () => (
     <Container>
-      <TripInfoModal isOpen={this.state.modal === 1} closeModal={this.closeModal}/>
+      <TripInfoModal isOpen={this.state.modal === 1} closeModal={this.closeModal} start={this.props.start} destination={this.props.destination}/>
       <SurveyModal isOpen={this.state.modal === 2} closeModal={this.closeModal}/>
       <Button onClick={() => this.openModal(1)}>Información del viaje</Button>
       <Button onClick={() => this.openModal(2)}>Dummy: Ir a encuesta</Button>

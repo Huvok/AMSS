@@ -52,16 +52,25 @@ const RegisterButton = styled(_Link)`
   text-decoration: none;
 `
 
+const CancelButton = styled(_Link)`
+  position: absolute;
+  bottom: 1.5em;
+  right: 2em;
+  color: inherit;
+  text-decoration: none;
+`
+
 const Login = () => (
   <Container>
-    <Header>Login</Header>
+    <Header>Registrar</Header>
     <LoginBox>
       <Label for='email'>Email</Label>
       <Input type='text' name='email'/>
       <Label for='password'>Password</Label>
       <Input type='password' name='password'/>
-      <RegisterButton to="/home">Register</RegisterButton>
+      <RegisterButton to="/">Register</RegisterButton>
     </LoginBox>
+    <CancelButton to="/"><i className="fas fa-times fa-2x"/></CancelButton>
   </Container>
 );
 
