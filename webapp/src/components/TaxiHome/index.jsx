@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Switch, Route, Link } from 'react-router-dom';
 
 import SignOutModal from '../Home/SignOutModal';
-// import Map from './Map';
+import Map from '../Home/Map';
 import WaitingForTrip from './WaitingForTrip';
 import FinishTrip from './FinishTrip';
 
@@ -65,12 +65,12 @@ class Home extends Component {
       <MapWrapper>
         <MenuButton to="/taxi/menu"><i className="fas fa-bars fa-lg" /></MenuButton>
         <SignOutButton as="div" onClick={this.openModal}><i className="fas fa-sign-out-alt fa-lg" /></SignOutButton>
-        {/* <Map
+        <Map
           googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBKIANqW2c99S9CmfcoznjjSg5K5buel8E&libraries=geometry,drawing,places"
           loadingElement={<div style={{ height: `100%` }} />}
           containerElement={<div style={{ height: `100%` }} />}
           mapElement={<div style={{ height: `100%` }} />}
-        /> */}
+        />
       </MapWrapper>
       <LowerBox>
         <Switch>
