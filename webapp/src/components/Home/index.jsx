@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 
 import SignOutModal from './SignOutModal';
 // import Map from './Map';
@@ -14,7 +14,7 @@ const Container = styled.div`
   position: relative;
 `
 
-const MenuButton = styled.div`
+const MenuButton = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,6 +26,8 @@ const MenuButton = styled.div`
   border-radius: 50%;
   background: ${props => props.theme.white};
   box-shadow: 0 2px 5px ${props => props.theme.lightgray};
+  color: inherit;
+  text-decoration: none;
   cursor: pointer;
 `
 
@@ -46,24 +48,23 @@ const LowerBox = styled.div`
 
 class Home extends Component {
   state = {
-    modal: 0
+    modal: false
   }
 
-  openModal = (number) => {
-    this.setState({ modal: number });
+  openModal = () => {
+    this.setState({ modal: true });
   }
 
   closeModal = () => {
-    console.log("CLOSED");
-    this.setState({ modal: 0 });
+    this.setState({ modal: false });
   }
 
   render = () => (
     <Container>
-      <SignOutModal isOpen={this.state.modal === 2} closeModal={this.closeModal}/>
+      <SignOutModal isOpen={this.state.modal} closeModal={this.closeModal}/>
       <MapWrapper>
-        <MenuButton><i className="fas fa-bars fa-lg" /></MenuButton>
-        <SignOutButton onClick={() => this.openModal(2)}><i className="fas fa-sign-out-alt fa-lg" /></SignOutButton>
+        <MenuButton to="/menu"><i className="fas fa-bars fa-lg" /></MenuButton>
+        <SignOutButton as="div" onClick={this.openModal}><i className="fas fa-sign-out-alt fa-lg" /></SignOutButton>
         {/* <Map
           googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBKIANqW2c99S9CmfcoznjjSg5K5buel8E&libraries=geometry,drawing,places"
           loadingElement={<div style={{ height: `100%` }} />}

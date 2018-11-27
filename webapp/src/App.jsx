@@ -7,6 +7,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Forgot from './components/Forgot';
 import Home from './components/Home';
+import Menu from './components/Menu';
 import FourOFour from './components/404';
 
 const Container = styled.div`
@@ -38,6 +39,9 @@ const App = () => (
       )}/>
       <Route path="/home" render={() => (
         <Home />
+      )}/>
+      <Route path="/menu" render={() => (
+        <Menu />
       )}/>
       <Route render={() => (
         <FourOFour />
