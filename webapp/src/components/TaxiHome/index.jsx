@@ -4,8 +4,8 @@ import { Switch, Route, Link } from 'react-router-dom';
 
 import SignOutModal from '../Home/SignOutModal';
 // import Map from './Map';
-import CurrentlyInTrip from './CurrentlyInTrip';
-import InputTrip from './InputTrip';
+import WaitingForTrip from './WaitingForTrip';
+import FinishTrip from './FinishTrip';
 
 const Container = styled.div`
   flex: 1;
@@ -63,7 +63,7 @@ class Home extends Component {
     <Container>
       <SignOutModal isOpen={this.state.modal} closeModal={this.closeModal}/>
       <MapWrapper>
-        <MenuButton to="/client/menu"><i className="fas fa-bars fa-lg" /></MenuButton>
+        <MenuButton to="/taxi/menu"><i className="fas fa-bars fa-lg" /></MenuButton>
         <SignOutButton as="div" onClick={this.openModal}><i className="fas fa-sign-out-alt fa-lg" /></SignOutButton>
         {/* <Map
           googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBKIANqW2c99S9CmfcoznjjSg5K5buel8E&libraries=geometry,drawing,places"
@@ -74,11 +74,11 @@ class Home extends Component {
       </MapWrapper>
       <LowerBox>
         <Switch>
-          <Route path="/client/home/trip" render={() => (
-            <CurrentlyInTrip />
+          <Route path="/taxi/home/trip" render={() => (
+            <FinishTrip />
           )}/>
           <Route render={() => (
-            <InputTrip />
+            <WaitingForTrip />
           )}/>
         </Switch>
       </LowerBox>

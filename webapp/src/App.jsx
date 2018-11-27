@@ -9,6 +9,9 @@ import Forgot from './components/Forgot';
 import ClientHome from './components/ClientHome';
 import ClientMenu from './components/ClientMenu';
 import ClientHistory from './components/ClientHistory';
+import TaxiHome from './components/TaxiHome';
+import TaxiMenu from './components/TaxiMenu';
+import TaxiHistory from './components/TaxiHistory';
 import FourOFour from './components/404';
 
 const Container = styled.div`
@@ -49,6 +52,15 @@ const App = () => (
       )}/>
       <Route path="/client/history" render={() => (
         <ClientHistory />
+      )}/>
+      <Route path="/taxi/home" render={() => (
+        <TaxiHome />
+      )}/>
+      <Route path="/taxi/menu" render={() => (
+        <TaxiMenu />
+      )}/>
+      <Route path="/taxi/history" render={() => (
+        <TaxiHistory />
       )}/>
       <Route render={() => (
         <FourOFour />

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link as _Link } from 'react-router-dom';
 
-import Modal from './Modal';
+import Modal from '../Home/Modal';
 
 const ModalContainer = styled.div`
   display: flex;

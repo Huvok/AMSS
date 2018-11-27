@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import Modal from '../Home/Modal';
 
@@ -24,29 +25,31 @@ const Paragraph = styled.p`
   margin: 0.25em 0;
 `
 
-const ReturnButton = styled.button`
+const ReturnButton = styled(Link)`
   align-self: end;
   padding: 0.5em;
   border: 0;
   background: transparent;
+  color: inherit;
   font-size: 0.8em;
+  text-decoration: none;
   cursor: pointer;
 `
 
-const TripInfoModal = ({ isOpen, closeModal }) => (
+const NewTripModal = ({ isOpen, closeModal }) => (
   <Modal isOpen={isOpen} closeModal={closeModal}>
     <Container>
-      <Header>Información del viaje</Header>
+      <Header>Nuevo viaje</Header>
       <Text>
+        <Paragraph>Cliente: Juan Ruíz</Paragraph>
+        <Paragraph>ID Cliente: 1024</Paragraph>
         <Paragraph>Origen: Monterrey</Paragraph>
         <Paragraph>Destino: Guadalajara</Paragraph>
-        <Paragraph>Chofer: Juan Ruíz</Paragraph>
-        <Paragraph>ID Chofer: 1024</Paragraph>
         <Paragraph>Km: 140</Paragraph>
       </Text>
-      <ReturnButton onClick={closeModal}>Cerrar</ReturnButton>
+      <ReturnButton onClick={closeModal} to="/taxi/home/trip">Aceptar</ReturnButton>
     </Container>
   </Modal>
-);
+)
 
-export default TripInfoModal;
+export default NewTripModal;
