@@ -10,12 +10,13 @@ const Paragraph = styled.p`
   margin: 0.3em 0;
 `
 
-const HistoryItem = ({ date, driver, distance, cost }) => (
+const HistoryItem = ({ rideID, source, destination, clientID, taxiID, baseQuota, distKm, fareRate, rideDate }) => (
   <Container>
-    <Paragraph><strong>Fecha:</strong> {date}</Paragraph>
-    <Paragraph><strong>Chofer:</strong> {driver}</Paragraph>
-    <Paragraph><strong>Distancia:</strong> {distance}km</Paragraph>
-    <Paragraph><strong>Costo:</strong> ${cost}</Paragraph>
+    <Paragraph><strong>Origen:</strong> {source}</Paragraph>
+    <Paragraph><strong>Destino:</strong> {destination}</Paragraph>
+    <Paragraph><strong>Distancia:</strong> {distKm.toFixed(1)} km</Paragraph>
+    <Paragraph><strong>Costo:</strong> ${(baseQuota + distKm * fareRate).toFixed(1)}</Paragraph>
+    <Paragraph><strong>Fecha:</strong> {rideDate.toString().substring(0,10)}</Paragraph>
   </Container>
 )
 

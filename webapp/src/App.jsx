@@ -48,7 +48,7 @@ const App = () => (
         <ClientHome />
       )}/>
       <Route path="/client/menu" render={() => (
-        <ClientMenu />
+        <ClientMenu client_id={1} />
       )}/>
       <Route path="/client/history" render={() => (
         <ClientHistory />

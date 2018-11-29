@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Container = styled.div`
   flex: 1;
@@ -56,40 +57,99 @@ const Button = styled(Link)`
   cursor: pointer;
 `
 
-const Menu = () => (
-  <Container>
-    <Info>
+/*
+class InputTrip extends Component {
+  state = {
+    modalOpen: false,
+  }
+
+  openModal = () => {
+    this.setState({ modalOpen: true });
+  }
+
+  closeModal = () => {
+    this.setState({ modalOpen: false });
+  }
+
+  render = () => (
+    <Container>
+      <Form>
+        <Input type="text" name="pickup" value={this.props.start} placeholder="Origen" onChange={(e) => this.props.changeLocation(true, e)}/>
+        <Input type="text" name="destination" value={this.props.destination} placeholder="Destino" onChange={(e) => this.props.changeLocation(false, e)}/>
+        <Button type="button" onClick={this.openModal}>Continuar</Button>
+      </Form>
+      <TripConfirmationModal isOpen={this.state.modalOpen} closeModal={this.closeModal} start={this.props.start} destination={this.props.destination}/>
+    </Container>
+  );
+}
+*/
+
+const host = 'http://localhost:60123/client?clientID=1';
+
+class Menu extends Component {
+  state = {
+    fname: '',
+    lname: '',
+    payment: [],
+    tripsCount: 0,
+  }
+
+  componentDidMount() {
+    axios.get(host).then(
+      res => {
+        this.setState( (state, props) => {
+          return {
+            fName: res.data.rows[0].fName,
+            lName: res.data.rows[0].lName,
+            payment: res.data.rows,
+            tripsCount: res.data.rows.length,
+          }
+        })
+      }
+    ).catch(
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  render = () => {
+    
+    var paymentList = this.state.payment.map( (card) => 
       <HorizontalField>
-        <Field><strong>Nombre:</strong> Juan Perez</Field>
-        <Icon className="fas fa-pencil-alt fa-lg"/>
-      </HorizontalField>
-      <HorizontalField>
-        <Field><strong>Ciudad:</strong> Monterrey</Field>
-        <Icon className="fas fa-pencil-alt fa-lg"/>
-      </HorizontalField>
-      <HorizontalField>
-        <Field><strong>Viajes realizados:</strong> 4</Field>
-      </HorizontalField>
-    </Info>
-    <Info>
-      <HorizontalField>
-        <Field><strong>Formas de pago:</strong></Field>
-      </HorizontalField>
-      <HorizontalField>
-        <Field>****-****-**29</Field>
+        <Field>**** {card.cardNo.toString().substring( card.cardNo.toString().length - 4, card.cardNo.toString().length )}</Field>
         <Icon className="fas fa-times fa-lg"/>
       </HorizontalField>
-      <HorizontalField>
-        <Field>****-****-**92</Field>
-        <Icon className="fas fa-times fa-lg"/>
-      </HorizontalField>
-      <HangingIcon className="fas fa-plus-circle fa-lg"/>
-    </Info>
-    <Options>
-      <Button to="/client/history">Ir a historial</Button>
-      <Button to="/client/home">Guardar y salir</Button>
-    </Options>
-  </Container>
-)
+    );
+
+    return(
+    <Container>
+      <Info>
+        <HorizontalField>
+          <Field><strong>Nombre:</strong> {this.state.fName + ' ' + this.state.lName}</Field>
+          <Icon className="fas fa-pencil-alt fa-lg"/>
+        </HorizontalField>
+        <HorizontalField>
+          <Field><strong>Ciudad:</strong> Monterrey</Field>
+          <Icon className="fas fa-pencil-alt fa-lg"/>
+        </HorizontalField>
+        <HorizontalField>
+          <Field><strong>Viajes realizados:</strong> {this.state.tripsCount}</Field>
+        </HorizontalField>
+      </Info>
+      <Info>
+        <HorizontalField>
+          <Field><strong>Formas de pago:</strong></Field>
+        </HorizontalField>
+        {paymentList}
+        <HangingIcon className="fas fa-plus-circle fa-lg"/>
+      </Info>
+      <Options>
+        <Button to="/client/history">Ir a historial</Button>
+        <Button to="/client/home">Guardar y salir</Button>
+      </Options>
+    </Container>
+  )}
+}
 
 export default Menu;

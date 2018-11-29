@@ -17,6 +17,16 @@ mysqlConnection.connect(
 );
 
 module.exports = {
+    getClientInfo: function(clientID, callback) {
+        var sql = 'SELECT * FROM Client c INNER JOIN Payment p WHERE c.clientID = ? AND c.clientID = p.clientID';
+        mysqlConnection.query(sql, [clientID], function(err, rows, fields) {
+            if(!err)
+                callback('OK', rows);
+            else
+                callback(err);
+        });
+    },
+
     postRide: function(source, destination, clientID, taxiID, baseQuota, fareRate, callback) {
         var sql = 'INSERT INTO Ride(source, destination, clientID, taxiID, ' +
             'baseQuota, distKm, fareRate, rideDate) VALUES (?, ?, ?, ?, ?, 5.00, ?, CURDATE())';

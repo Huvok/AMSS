@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link as _Link } from 'react-router-dom';
+import axios from 'axios';
 
 import Modal from '../Home/Modal';
 
@@ -96,44 +97,100 @@ const Link = styled(_Link)`
   align-self: center;
 `
 
-const TripConfirmationModal = ({ isOpen, closeModal, start, destination }) => (
-  <Modal fullscreen isOpen={isOpen} closeModal={closeModal}>
-    <ModalContainer>
-      <Locations>
-        <LocationText><strong>Origen</strong>: {start}</LocationText>
-        <LocationText><strong>Destino</strong>: {destination}</LocationText>
-      </Locations>
-      <RideDetails>
-        <Field>
-          <Label>Vehículo</Label>
-          <Select>
-            <Option>Taxi: Versa</Option>
-          </Select>
-        </Field>
-        <Field>
-          <ModalInput type="number" min="1" max="4" placeholder="Asientos" required />
-        </Field>
-        <Field>
-          <Label>Forma de pago</Label>
-          <Select>
-            <Option>Credito MasterCard ****5959</Option>
-          </Select>
-        </Field>
-      </RideDetails>
-      <TripDetails>
-        <Metrics>
-          <MetricsText>Distancia: 5.9km</MetricsText>
-          <MetricsText>Costo: $46.70</MetricsText>
-        </Metrics>
-        <Buttons>
-          <Link onClick={closeModal} to="/client/home/trip">
-            <ModalButton>Aceptar</ModalButton>
-          </Link>
-          <ModalButton onClick={closeModal} red>Cancelar</ModalButton>
-        </Buttons>
-      </TripDetails>
-    </ModalContainer>
-  </Modal>
-)
+const host = 'http://localhost:60123/client?clientID=1';
+
+class TripConfirmationModal extends Component {
+
+  state = {
+    payment: [],
+    baseQuota: 0,
+    distance: 0,
+    fareRate: 0,
+    price: 0,
+  }
+
+  componentDidMount() {
+    axios.get(host).then(
+      res => {
+        this.setState( (state, props) => {
+          return {
+            payment: res.data.rows,
+          }
+        });
+      }
+    ).catch(
+      err => {
+        console.log(err);
+      }
+    );
+    this.getTripDetails();
+  }
+
+  getTripDetails = () => {
+    axios.get('http://localhost:60123/fareService').then(
+      res => {
+        this.setState( (state, props) => {
+          return {
+            baseQuota: res.data.baseQuota,
+            distance: res.data.distance,
+            fareRate: res.data.fareRate,
+            price: res.data.price,
+          }
+        });
+      }
+    ).catch(
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  render = () => {
+
+    var paymentList = this.state.payment.map( (card) => 
+      <Option>Credito MasterCard **** {card.cardNo.toString().substring( card.cardNo.toString().length - 4, card.cardNo.toString().length )}</Option>
+    );
+
+    return (
+      <Modal fullscreen isOpen={this.props.isOpen} closeModal={this.props.closeModal}>
+        <ModalContainer>
+          <Locations>
+            <LocationText><strong>Origen</strong>: {this.props.start}</LocationText>
+            <LocationText><strong>Destino</strong>: {this.props.destination}</LocationText>
+          </Locations>
+          <RideDetails>
+            <Field>
+              <Label>Vehículo</Label>
+              <Select>
+                <Option>Taxi: Versa</Option>
+              </Select>
+            </Field>
+            <Field>
+              <ModalInput type="number" min="1" max="4" placeholder="Asientos" required />
+            </Field>
+            <Field>
+              <Label>Forma de pago</Label>
+              <Select>
+                {paymentList}
+              </Select>
+            </Field>
+          </RideDetails>
+          <TripDetails>
+            <Metrics>
+              <MetricsText>Distancia: {this.state.distance.toFixed(1)} km</MetricsText>
+              <MetricsText>Costo: ${this.state.price.toFixed(1)}</MetricsText>
+            </Metrics>
+            <Buttons>
+              <Link onClick={this.props.closeModal} to="/client/home/trip">
+                <ModalButton>Aceptar</ModalButton>
+              </Link>
+              <ModalButton onClick={this.props.closeModal} red>Cancelar</ModalButton>
+            </Buttons>
+          </TripDetails>
+        </ModalContainer>
+      </Modal>
+    );
+  }
+}
 
 export default TripConfirmationModal;

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 import HistoryItem from './HistoryItem';
 
@@ -73,16 +74,46 @@ const content = [
   }
 ]
 
-const History = () => (
-  <Container>
-    <Header>Historial</Header>
-    <HistoryList>
-      {content.map((item, index) => (
-        <HistoryItem {...item}/>
-      ))}
-    </HistoryList>
-    <Button to="/client/menu">Regresar</Button>
-  </Container>
-)
+const host = 'http://localhost:60123/rideByClient?clientID=1';
+
+class History extends Component {
+
+  state = {
+    content: [],
+  }
+
+  componentDidMount = () => {
+    axios.get(host).then(
+      res => {
+        console.log(res.data.rows);
+        this.setState( (state, props) => {
+          return {
+            content: res.data.rows,
+          }
+        })
+      }
+    ).catch(
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  render = () => {
+    var tripsList = this.state.content.map( (trip) => 
+      <HistoryItem {...trip}/>
+    );
+
+    return (
+      <Container>
+        <Header>Historial</Header>
+        <HistoryList>
+          {tripsList}
+        </HistoryList>
+        <Button to="/client/menu">Regresar</Button>
+      </Container>
+    );
+  }
+}
 
 export default History;

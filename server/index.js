@@ -8,6 +8,30 @@ app.use(express.json());
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
+app.get('/fareService', function(req, res) {
+    var distance = Math.random() * 29 + 1.0;
+    var baseQuota = Math.random() * 45 + 25.0;
+    var fareRate = Math.random() * 8 + 2.0;
+    var price = baseQuota + distance * fareRate;
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.send(JSON.stringify({
+        'distance': distance,
+        'baseQuota': baseQuota,
+        'fareRate': fareRate,
+        'price': price,
+    }));
+});
+
+app.get('/client', function(req, res) {
+    var clientID = req.query['clientID'];
+    db_layer.getClientInfo(clientID, function(status, rows) {
+        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.send(JSON.stringify({'status': status, 'rows': rows}));
+    });
+});
+
 // HU1
 app.put('/config', function (req, res) {
     var rate = req.body['rate'];
@@ -31,6 +55,8 @@ app.post('/ride', function(req, res) {
 app.get('/rideByClient', function(req, res) {
     var clientID = req.query['clientID'];
     db_layer.getRideByClient(clientID, function(status, rows) {
+        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.send(JSON.stringify({'status': status, 'rows': rows}));
     });
 });
@@ -68,6 +94,19 @@ app.post('/loginClient', function(req, res) {
     var email = req.body['email'];
     var passwd = req.body['passwd'];
     db_layer.postLoginClient(email, passwd, function(status) {
+        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.send(JSON.stringify({'status': status}));
+    });
+});
+
+app.options('/loginClient', function(req, res) {
+    var email = req.body['email'];
+    var passwd = req.body['passwd'];
+    db_layer.postLoginClient(email, passwd, function(status) {
+        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Headers', 'content-type');
         res.send(JSON.stringify({'status': status}));
     });
 });
@@ -123,4 +162,4 @@ app.get('/ride', function(req, res) {
     });
 });
 
-app.listen(3000, () => console.log('Server running on port 3000'));
+app.listen(60123, () => console.log('Server running on port 60123'));
