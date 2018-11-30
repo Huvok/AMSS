@@ -32,6 +32,15 @@ app.get('/client', function(req, res) {
     });
 });
 
+app.get('/taxi', function(req, res) {
+    var clientID = req.query['taxiID'];
+    db_layer.getTaxiInfo(taxiID, function(status, rows) {
+        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.send(JSON.stringify({'status': status, 'rows': rows}));
+    });
+});
+
 // HU1
 app.put('/config', function (req, res) {
     var rate = req.body['rate'];

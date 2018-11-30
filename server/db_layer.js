@@ -27,6 +27,16 @@ module.exports = {
         });
     },
 
+    getTaxiInfo: function(taxiID, callback) {
+        var sql = 'SELECT * FROM Taxi t INNER JOIN Driver d ON t.driverID = d.driverID WHERE t.taxiID = ?;';
+        mysqlConnection.query(sql, [taxiID], function(err, row, fields) {
+            if(!err)
+                callback('OK', row);
+            else
+                callback(err);
+        });
+    },
+
     postRide: function(source, destination, clientID, taxiID, baseQuota, fareRate, callback) {
         var sql = 'INSERT INTO Ride(source, destination, clientID, taxiID, ' +
             'baseQuota, distKm, fareRate, rideDate) VALUES (?, ?, ?, ?, ?, 5.00, ?, CURDATE())';

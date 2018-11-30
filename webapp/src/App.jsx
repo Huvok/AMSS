@@ -27,11 +27,21 @@ const Container = styled.div`
 
 class App extends Component {
   state = {
-    clientID: null
+    clientID: null,
+    rideID: null,
+    taxiID: null,
   }
 
   clientIDHandler = (c) => {
     this.setState({ clientID: c });
+  }
+
+  rideIDHandler = (r) => {
+    this.setState({ rideID: r })
+  }
+
+  taxiIDHandler = (t) => {
+    this.setState({ taxiID: t })
   }
 
   render = () => (
