@@ -101,6 +101,7 @@ class Login extends Component {
     email: '',
     passwd: '',
     auth: false,
+    clientID: -1,
   }
 
   emailChangeHandler = (event) => {
@@ -124,10 +125,13 @@ class Login extends Component {
     };
     axios.post(host, body).then(
       res => {
-        if(res.data.status == 'OK'){
+        console.log(res);
+        if(res.data.status === 'OK'){
           this.setState({
             auth: true,
+            clientID: res.data.clientID,
           });
+          this.props.changeID(res.data.clientID);
         }
       }
     ).catch(

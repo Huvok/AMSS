@@ -61,18 +61,22 @@ class Home extends Component {
     this.setState({ modal: false });
   }
 
+  /*
+          <Map
+          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBKIANqW2c99S9CmfcoznjjSg5K5buel8E&libraries=geometry,drawing,places"
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `100%` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
+        />
+  */
+
   render = () => (
     <Container>
       <SignOutModal isOpen={this.state.modal} closeModal={this.closeModal}/>
       <MapWrapper>
         <MenuButton to="/taxi/menu"><i className="fas fa-bars fa-lg" /></MenuButton>
         <SignOutButton as="div" onClick={this.openModal}><i className="fas fa-sign-out-alt fa-lg" /></SignOutButton>
-        <Map
-          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyBKIANqW2c99S9CmfcoznjjSg5K5buel8E&libraries=geometry,drawing,places"
-          loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `100%` }} />}
-          mapElement={<div style={{ height: `100%` }} />}
-        />
+
       </MapWrapper>
       <LowerBox>
         <Switch>

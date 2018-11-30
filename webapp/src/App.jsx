@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 
@@ -25,15 +25,24 @@ const Container = styled.div`
   color: ${props => props.theme.black};
 `
 
-const App = () => (
-  <Container>
+class App extends Component {
+  state = {
+    clientID: null
+  }
+
+  clientIDHandler = (c) => {
+    this.setState({ clientID: c });
+  }
+
+  render = () => (
+    <Container>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossOrigin="anonymous"/>
     <Switch>
       <Route exact path="/" render={() => (
         <Start />
       )}/>
       <Route path="/clientLogin" render={() => (
-        <Login homePath="/client/home"/>
+        <Login homePath="/client/home" changeID={this.clientIDHandler}/>
       )}/>
       <Route path="/taxiLogin" render={() => (
         <Login homePath="/taxi/home"/>
@@ -45,13 +54,13 @@ const App = () => (
         <Forgot />
       )}/>
       <Route path="/client/home" render={() => (
-        <ClientHome />
+        <ClientHome clientID={this.state.clientID} />
       )}/>
       <Route path="/client/menu" render={() => (
-        <ClientMenu client_id={1} />
+        <ClientMenu clientID={this.state.clientID} />
       )}/>
       <Route path="/client/history" render={() => (
-        <ClientHistory />
+        <ClientHistory clientID={this.state.clientID}/>
       )}/>
       <Route path="/taxi/home" render={() => (
         <TaxiHome />
@@ -67,6 +76,7 @@ const App = () => (
       )}/>
     </Switch>
   </Container>
-);
+  )
+}
 
 export default App;

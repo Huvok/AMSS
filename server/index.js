@@ -93,22 +93,26 @@ app.post('/loginAdmin', function(req, res) {
 app.post('/loginClient', function(req, res) {
     var email = req.body['email'];
     var passwd = req.body['passwd'];
-    db_layer.postLoginClient(email, passwd, function(status) {
+    db_layer.postLoginClient(email, passwd, function(status, clientID) {
         res.setHeader('Content-Type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin', '*');
-        res.send(JSON.stringify({'status': status}));
+        res.send(JSON.stringify({'status': status, 'clientID': clientID}));
     });
 });
 
 app.options('/loginClient', function(req, res) {
-    var email = req.body['email'];
-    var passwd = req.body['passwd'];
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'content-type');
+    res.send();
+    /*
     db_layer.postLoginClient(email, passwd, function(status) {
         res.setHeader('Content-Type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Headers', 'content-type');
         res.send(JSON.stringify({'status': status}));
     });
+    */
 });
 
 // CU10

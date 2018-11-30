@@ -84,7 +84,7 @@ class InputTrip extends Component {
 }
 */
 
-const host = 'http://localhost:60123/client?clientID=1';
+const host = 'http://localhost:60123';
 
 class Menu extends Component {
   state = {
@@ -95,13 +95,27 @@ class Menu extends Component {
   }
 
   componentDidMount() {
-    axios.get(host).then(
+    console.log(host + '/client?clientID=' + this.props.clientID);
+    axios.get(host + '/client?clientID=' + this.props.clientID).then(
       res => {
         this.setState( (state, props) => {
           return {
             fName: res.data.rows[0].fName,
             lName: res.data.rows[0].lName,
             payment: res.data.rows,
+            tripsCount: res.data.rows.length,
+          }
+        })
+      }
+    ).catch(
+      err => {
+        console.log(err);
+      }
+    );
+    axios.get(host + '/rideByClient?clientID=' + this.props.clientID).then(
+      res => {
+        this.setState( (state, props) => {
+          return {
             tripsCount: res.data.rows.length,
           }
         })

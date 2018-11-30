@@ -47,34 +47,7 @@ const Button = styled(Link)`
   cursor: pointer;
 `
 
-const content = [
-  {
-    date: '04/nov/98',
-    driver: 'D Hernandez',
-    distance: 20,
-    cost: 42
-  },
-  {
-    date: '26/nov/18',
-    driver: 'J Perez',
-    distance: 20,
-    cost: 40
-  },
-  {
-    date: '7/dec/18',
-    driver: 'M Sakurai',
-    distance: 1000,
-    cost: 2500
-  },
-  {
-    date: '1/jan/10',
-    driver: 'someone',
-    distance: 100,
-    cost: 240
-  }
-]
-
-const host = 'http://localhost:60123/rideByClient?clientID=1';
+const host = 'http://localhost:60123/rideByClient';
 
 class History extends Component {
 
@@ -83,7 +56,7 @@ class History extends Component {
   }
 
   componentDidMount = () => {
-    axios.get(host).then(
+    axios.get(host + '?clientID=' + this.props.clientID).then(
       res => {
         console.log(res.data.rows);
         this.setState( (state, props) => {

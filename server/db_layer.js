@@ -74,9 +74,9 @@ module.exports = {
         mysqlConnection.query(sql, [email, passwd], function(err, rows, fields) {
             if (!err) {
                 if (rows.length > 0)
-                    callback('OK');
+                    callback('OK', rows[0].clientID);
                 else
-                    callback('INCORRECT LOGIN');
+                    callback('INCORRECT LOGIN', -1);
             }
             else
                 callback(err);
@@ -88,9 +88,9 @@ module.exports = {
         mysqlConnection.query(sql, [email, passwd], function(err, rows, fields) {
             if (!err) {
                 if (rows.length > 0)
-                    callback('OK');
+                    callback('OK', rows[0].clientID);
                 else
-                    callback('INCORRECT LOGIN');
+                    callback('INCORRECT LOGIN', -1);
             }
             else
                 callback(err);
