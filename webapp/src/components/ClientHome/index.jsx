@@ -4,7 +4,7 @@ import { Switch, Route, Link } from 'react-router-dom';
 
 import SignOutModal from '../Home/SignOutModal';
 import Map from '../Home/Map';
-import CurrentlyInTrip from './CurrentlyInTrip';
+import Trip from './Trip';
 import InputTrip from './InputTrip';
 
 const Container = styled.div`
@@ -92,7 +92,7 @@ class Home extends Component {
       <LowerBox>
         <Switch>
           <Route path="/client/home/trip" render={() => (
-            <CurrentlyInTrip start={this.state.start} destination={this.state.destination}/>
+            <Trip start={this.state.start} destination={this.state.destination}/>
           )}/>
           <Route render={() => (
             <InputTrip start={this.state.start} destination={this.state.destination} changeLocation={this.locationHandler}/>

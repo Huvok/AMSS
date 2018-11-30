@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
+import WaitingForTripModal from './WaitingForTripModal';
 import TripInfoModal from './TripInfoModal';
 import SurveyModal from './SurveyModal';
 
@@ -29,7 +30,20 @@ const Button = styled.button`
 
 class CurrentlyInTrip extends Component {
   state = {
-    modal: 0
+    modal: 1,
+    timeout: null
+  }
+
+  componentDidMount = () => {
+    this.state.timeout = setTimeout(() => {
+      this.setState({ modal: 2 });
+      setTimeout(() => {
+        this.setState({ modal: 0 });
+        setTimeout(() => {
+          this.setState({ modal: 3 });
+        }, 5000)
+      }, 5000);
+    }, 5000);
   }
 
   openModal = (number) => {
@@ -40,12 +54,18 @@ class CurrentlyInTrip extends Component {
     this.setState({ modal: 0 });
   }
 
+  cancelTrip = () => {
+    clearTimeout(this.state.timeout);
+    window.history.back()
+  }
+
   render = () => (
     <Container>
-      <TripInfoModal isOpen={this.state.modal === 1} closeModal={this.closeModal} start={this.props.start} destination={this.props.destination}/>
-      <SurveyModal isOpen={this.state.modal === 2} closeModal={this.closeModal}/>
+      <WaitingForTripModal isOpen={this.state.modal === 1} cancelTrip={this.cancelTrip}/>
+      <TripInfoModal isOpen={this.state.modal === 2} closeModal={this.closeModal} start={this.props.start} destination={this.props.destination}/>
+      <SurveyModal isOpen={this.state.modal === 3} closeModal={this.cancelTrip}/>
       <Button onClick={() => this.openModal(1)}>Información del viaje</Button>
-      <Button onClick={() => this.openModal(2)}>Dummy: Ir a encuesta</Button>
+      <Button onClick={this.cancelTrip}>Cancelar</Button>
     </Container>
   )
 }
