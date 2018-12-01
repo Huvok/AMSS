@@ -17,10 +17,30 @@ mysqlConnection.connect(
 );
 
 module.exports = {
-    postRide: function(source, destination, clientID, taxiID, baseQuota, fareRate, callback) {
+    getClientInfo: function(clientID, callback) {
+        var sql = 'SELECT * FROM Client c INNER JOIN Payment p WHERE c.clientID = ? AND c.clientID = p.clientID';
+        mysqlConnection.query(sql, [clientID], function(err, rows, fields) {
+            if(!err)
+                callback('OK', rows);
+            else
+                callback(err);
+        });
+    },
+
+    getTaxiInfo: function(taxiID, callback) {
+        var sql = 'SELECT * FROM Taxi t INNER JOIN Driver d ON t.driverID = d.driverID WHERE t.taxiID = ?;';
+        mysqlConnection.query(sql, [taxiID], function(err, row, fields) {
+            if(!err)
+                callback('OK', row);
+            else
+                callback(err);
+        });
+    },
+
+    postRide: function(source, destination, clientID, taxiID, baseQuota, fareRate, distKm, callback) {
         var sql = 'INSERT INTO Ride(source, destination, clientID, taxiID, ' +
-            'baseQuota, distKm, fareRate, rideDate) VALUES (?, ?, ?, ?, ?, 5.00, ?, CURDATE())';
-        mysqlConnection.query(sql, [source, destination, clientID, taxiID, baseQuota, fareRate], function(err, rows, fields) {
+            'baseQuota, distKm, fareRate, rideDate) VALUES (?, ?, ?, ?, ?, ?, ?, CURDATE())';
+        mysqlConnection.query(sql, [source, destination, clientID, taxiID, baseQuota, distKm, fareRate], function(err, rows, fields) {
             if (!err)
                 callback('OK');
             else
@@ -64,9 +84,9 @@ module.exports = {
         mysqlConnection.query(sql, [email, passwd], function(err, rows, fields) {
             if (!err) {
                 if (rows.length > 0)
-                    callback('OK');
+                    callback('OK', rows[0].clientID);
                 else
-                    callback('INCORRECT LOGIN');
+                    callback('INCORRECT LOGIN', -1);
             }
             else
                 callback(err);
@@ -78,9 +98,9 @@ module.exports = {
         mysqlConnection.query(sql, [email, passwd], function(err, rows, fields) {
             if (!err) {
                 if (rows.length > 0)
-                    callback('OK');
+                    callback('OK', rows[0].clientID);
                 else
-                    callback('INCORRECT LOGIN');
+                    callback('INCORRECT LOGIN', -1);
             }
             else
                 callback(err);
