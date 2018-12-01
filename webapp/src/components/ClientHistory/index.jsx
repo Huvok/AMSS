@@ -56,6 +56,7 @@ class History extends Component {
   }
 
   componentDidMount = () => {
+    console.log(host + '?clientID=' + this.props.clientID);
     axios.get(host + '?clientID=' + this.props.clientID).then(
       res => {
         console.log(res.data.rows);

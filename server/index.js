@@ -48,6 +48,7 @@ app.put('/config', function (req, res) {
 });
 
 // CU5
+
 app.post('/ride', function(req, res) {
     var source = req.body['source'];
     var destination = req.body['destination'];
@@ -55,9 +56,21 @@ app.post('/ride', function(req, res) {
     var taxiID = req.body['taxiID'];
     var baseQuota = req.body['baseQuota'];
     var fareRate = req.body['fareRate'];
-    db_layer.postRide(source, destination, clientID, taxiID, baseQuota, fareRate, function(status) {
+    var distKm = req.body['distance'];
+    db_layer.postRide(source, destination, clientID, taxiID, baseQuota, fareRate, distKm, function(status) {
+        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Headers', 'content-type');
         res.send(JSON.stringify({'status': status}));
     });
+});
+    
+
+app.options('/ride', function(req, res) {
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'content-type');
+    res.send();
 });
 
 // CU6.1
@@ -114,14 +127,12 @@ app.options('/loginClient', function(req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'content-type');
     res.send();
-    /*
     db_layer.postLoginClient(email, passwd, function(status) {
         res.setHeader('Content-Type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Allow-Headers', 'content-type');
         res.send(JSON.stringify({'status': status}));
     });
-    */
 });
 
 // CU10
@@ -154,9 +165,17 @@ app.post('/ridePending', function(req, res) {
     var clientID = req.body['clientID'];
     var baseQuota = req.body['baseQuota'];
     var fareRate = req.body['fareRate'];
-    db_layer.postRidePending(source, destination, clientID, baseQuota, fareRate, function(status) {
+    var taxiID = req.body['taxiID'];
+    db_layer.postRidePending(source, destination, clientID, baseQuota, fareRate, taxiID, function(status) {
         res.send(JSON.stringify({'status': status}));
     });
+});
+
+app.options('/ridePending', function(req, res) {
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'content-type');
+    res.send();
 });
 
 app.put('/ridePending', function(req, res) {

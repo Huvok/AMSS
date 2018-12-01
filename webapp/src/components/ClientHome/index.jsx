@@ -52,7 +52,11 @@ class Home extends Component {
   state = {
     modal: false,
     start: '',
-    destination: ''
+    destination: '',
+    distance: 0.0,
+    baseQuota: 0.0,
+    fareRate: 0.0,
+    price: 0.0,
   }
 
   openModal = () => {
@@ -69,6 +73,15 @@ class Home extends Component {
     } else {
       this.setState({ destination: event.target.value });
     }
+  }
+
+  fareHandler = (distance, baseQuota, fareRate, price) => {
+    this.setState({
+      distance: distance,
+      baseQuota: baseQuota,
+      fareRate: fareRate,
+      price: price,
+    });
   }
 
   /*
@@ -92,10 +105,10 @@ class Home extends Component {
       <LowerBox>
         <Switch>
           <Route path="/client/home/trip" render={() => (
-            <Trip start={this.state.start} destination={this.state.destination}/>
+            <Trip clientID={this.props.clientID} source={this.state.start} destination={this.state.destination} distance={this.state.distance} baseQuota={this.state.baseQuota} fareRate={this.state.fareRate} price={this.state.price}/>
           )}/>
           <Route render={() => (
-            <InputTrip start={this.state.start} destination={this.state.destination} changeLocation={this.locationHandler}/>
+            <InputTrip start={this.state.start} destination={this.state.destination} changeFare={this.fareHandler} changeLocation={this.locationHandler}/>
           )}/>
         </Switch>
       </LowerBox>

@@ -37,10 +37,10 @@ module.exports = {
         });
     },
 
-    postRide: function(source, destination, clientID, taxiID, baseQuota, fareRate, callback) {
+    postRide: function(source, destination, clientID, taxiID, baseQuota, fareRate, distKm, callback) {
         var sql = 'INSERT INTO Ride(source, destination, clientID, taxiID, ' +
-            'baseQuota, distKm, fareRate, rideDate) VALUES (?, ?, ?, ?, ?, 5.00, ?, CURDATE())';
-        mysqlConnection.query(sql, [source, destination, clientID, taxiID, baseQuota, fareRate], function(err, rows, fields) {
+            'baseQuota, distKm, fareRate, rideDate) VALUES (?, ?, ?, ?, ?, ?, ?, CURDATE())';
+        mysqlConnection.query(sql, [source, destination, clientID, taxiID, baseQuota, distKm, fareRate], function(err, rows, fields) {
             if (!err)
                 callback('OK');
             else

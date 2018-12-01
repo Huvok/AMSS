@@ -137,6 +137,7 @@ class TripConfirmationModal extends Component {
             price: res.data.price,
           }
         });
+        this.props.changeFare(this.state.distance, this.state.baseQuota, this.state.fareRate, this.state.price);
       }
     ).catch(
       err => {

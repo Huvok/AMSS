@@ -53,7 +53,7 @@ class InputTrip extends Component {
         <Input type="text" name="destination" value={this.props.destination} placeholder="Destino" onChange={(e) => this.props.changeLocation(false, e)}/>
         <Button type="button" onClick={this.openModal}>Continuar</Button>
       </Form>
-      <TripConfirmationModal isOpen={this.state.modalOpen} closeModal={this.closeModal} start={this.props.start} destination={this.props.destination}/>
+      <TripConfirmationModal isOpen={this.state.modalOpen} closeModal={this.closeModal} start={this.props.start} destination={this.props.destination} changeFare={this.props.changeFare}/>
     </Container>
   );
 }

@@ -100,7 +100,7 @@ class Login extends Component {
   state = {
     email: '',
     passwd: '',
-    auth: true,
+    auth: false,
     clientID: -1,
   }
 
